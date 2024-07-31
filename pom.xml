@@ -5,6 +5,12 @@
     <artifactId>fj-doc-quarkus-demo</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>org.fugerit.java</groupId>
+        <artifactId>fj-bom</artifactId>
+        <version>1.6.5</version>
+    </parent>
+
     <properties>
         <compiler-plugin.version>3.12.1</compiler-plugin.version>
         <maven.compiler.release>21</maven.compiler.release>
