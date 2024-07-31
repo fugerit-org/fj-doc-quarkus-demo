@@ -11,7 +11,6 @@ import org.fugerit.java.doc.base.config.DocConfig;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
 @Slf4j
 @Path("/doc")
 public class DocRest {
@@ -24,9 +23,8 @@ public class DocRest {
 
     Response generateDocWorker( String chainId, String handleId ) {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream() ) {
-            log.info( "generateDocWorker, chainId:{} START handleId:{}", chainId, handleId );
             this.facade.handle( chainId, handleId, baos );
-            log.info( "generateDocWorker, chainId:{} END size:{}", chainId, baos.toByteArray().length );
+            log.info( "generateDocWorker, chainId:{}, free memory:{} / max memoery:{}", chainId, Runtime.getRuntime().freeMemory()/1024/1024, Runtime.getRuntime().maxMemory()/1024/1024 );
             return Response.ok( baos.toByteArray() ).build();
         } catch (IOException e) {
             log.error( String.format( "Error : %s", e.getCause() ), e );

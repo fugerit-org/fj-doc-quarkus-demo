@@ -116,4 +116,12 @@
 		<chainStep stepType="complex" template-path="${chainId}.ftl"/>
 	</docChain>
 
+	<docChain id="simple-test-02" parent="shared">
+		<chainStep stepType="complex" template-path="${chainId}.ftl"/>
+	</docChain>
+
+	<docChain id="simple-test-03" parent="shared">
+		<chainStep stepType="complex" template-path="${chainId}.ftl"/>
+	</docChain>
+
 </freemarker-doc-process-config>
