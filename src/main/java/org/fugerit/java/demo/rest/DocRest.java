@@ -1,5 +1,6 @@
 package org.fugerit.java.demo.rest;
 
+import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -35,6 +36,7 @@ public class DocRest {
     @GET
     @Path("/pdf/{idDoc}.pdf")
     @Produces("application/pdf")
+    @RunOnVirtualThread
     public Response handleDocPdf(@PathParam("idDoc") String idDoc) {
        return this.generateDocWorker( idDoc, DocConfig.TYPE_PDF );
     }
@@ -42,6 +44,7 @@ public class DocRest {
     @GET
     @Path("/pdf/handler/{idHandler}/{idDoc}.pdf")
     @Produces("application/pdf")
+    @RunOnVirtualThread
     public Response handleDocPdf(@PathParam("idHandler") String idHandler, @PathParam("idDoc") String idDoc) {
         return this.generateDocWorker( idDoc, idHandler );
     }
