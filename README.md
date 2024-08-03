@@ -5,8 +5,8 @@ Simple demo application to test performances of [Fugerit Venus Doc](https://gith
 [![Keep a Changelog v1.1.0 badge](https://img.shields.io/badge/changelog-Keep%20a%20Changelog%20v1.1.0-%23E05735)](CHANGELOG.md)
 [![license](https://img.shields.io/badge/License-MIT%20License-teal.svg)](https://opensource.org/license/mit)
 [![code of conduct](https://img.shields.io/badge/conduct-Contributor%20Covenant-purple.svg)](https://github.com/fugerit-org/fj-doc-quarkus-demo/blob/main/CODE_OF_CONDUCT.md)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_fj-doc&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-doc)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_fj-doc&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-doc)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_fj-doc-quarkus-demo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-doc-quarkus-demo)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_fj-doc-quarkus-demo&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-doc-quarkus-demo)
 
 [![Java version](https://img.shields.io/badge/JD-java%2021+-%23113366.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://universe.fugerit.org/src/docs/versions/java21.html)
 [![Apache Maven](https://img.shields.io/badge/Apache%20Maven-3.9.0+-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)](https://universe.fugerit.org/src/docs/versions/maven3_9.html)
@@ -25,6 +25,8 @@ mvn clean package
 ```
 
 ### 2. Run benchmark script
+
+Benchmark script requirements : *bash*, *h2load*, *psrecord*
 
 ```shell
 ./src/main/script/bench-graph-h2-load.sh pdf-fop 1000
@@ -70,8 +72,8 @@ out_pdf-fop.png
 
 And here is some samples 
 
-| platform                | pdf-fop                          | pdf-fop-pool                     | openpdf                          | output folder                                                              |
-|-------------------------|----------------------------------|----------------------------------|----------------------------------|----------------------------------------------------------------------------|
-| macbook pro 16 max 32gb | 28.05s, 1782.40 req/s, 29.88MB/s | 20.81s, 2402.76 req/s, 40.28MB/s | 53.42s, 936.05 req/s, 8.89MB/s   | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/macpro_max_16_m1) |
-| ryzen 3700X 32gb        | 28.07s, 1781.52 req/s, 29.86MB/s | 19.66s, 2543.10 req/s, 42.63MB/s | 40.91s, 1222.29 req/s, 11.61MB/s | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/ryzen_3700X)      |
+| platform                | pdf-fop                          | pdf-fop-pool                     | openpdf                          | output folder                                                              | parameters                                   |
+|-------------------------|----------------------------------|----------------------------------|----------------------------------|----------------------------------------------------------------------------|----------------------------------------------|
+| macbook pro 16 max 32gb | 28.05s, 1782.40 req/s, 29.88MB/s | 20.81s, 2402.76 req/s, 40.28MB/s | 53.42s, 936.05 req/s, 8.89MB/s   | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/macpro_max_16_m1) | h2load, 50000 request, 60 clients, 4 threads |
+| ryzen 3700X 32gb        | 28.07s, 1781.52 req/s, 29.86MB/s | 19.66s, 2543.10 req/s, 42.63MB/s | 40.91s, 1222.29 req/s, 11.61MB/s | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/ryzen_3700X)      | h2load, 50000 request, 60 clients, 4 threads |
 
