@@ -1,79 +1,56 @@
 # fj-doc-quarkus-demo
 
-Fugerit Venus Quarkus Demo application
+Simple demo application to test performances of [Fugerit Venus Doc](https://github.com/fugerit-org/fj-doc) library.
 
 [![Keep a Changelog v1.1.0 badge](https://img.shields.io/badge/changelog-Keep%20a%20Changelog%20v1.1.0-%23E05735)](CHANGELOG.md)
+[![license](https://img.shields.io/badge/License-MIT%20License-teal.svg)](https://opensource.org/license/mit)
+[![code of conduct](https://img.shields.io/badge/conduct-Contributor%20Covenant-purple.svg)](https://github.com/fugerit-org/fj-doc-quarkus-demo/blob/main/CODE_OF_CONDUCT.md)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_fj-doc&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-doc)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_fj-doc&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-doc)
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+[![Java version](https://img.shields.io/badge/JD-java%2021+-%23113366.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://universe.fugerit.org/src/docs/versions/java21.html)
+[![Apache Maven](https://img.shields.io/badge/Apache%20Maven-3.9.0+-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)](https://universe.fugerit.org/src/docs/versions/maven3_9.html)
+[![Fugerit Github Project Conventions](https://img.shields.io/badge/Fugerit%20Org-Project%20Conventions-1A36C7?style=for-the-badge&logo=Onlinect%20Playground&logoColor=white)](https://universe.fugerit.org/src/docs/conventions/index.html)
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+Here you can find [quarkus original readme](README_QUARKUS.md).
 
-## Running the application in dev mode
+## Quickstart
 
-You can run your application in dev mode that enables live coding using:
+After clone, from the project root : 
 
-```shell script
-./mvnw compile quarkus:dev
+### 1. Build
+
+```shell
+mvn clean package
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+### 2. Run benchmark script
 
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
+```shell
+./src/main/script/bench-graph-h2-load.sh pdf-fop '' 1000
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+**The script accepts these positional arguments :**
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+| position               | required | default | description                                                                   |
+|------------------------|----------|---------|-------------------------------------------------------------------------------|
+| 1 (HANDLER)            | true     |         | handler id : 'pdf-fop', 'pdf-fop-pool', 'pdf-a-fop', 'pdf-ua-fop' , 'openpdf' |
+| 2 (LOG_FILE)           | false    |         | If different from "" should be the path to write the h2load outputs           |
+| 3 (NUMBER_OF_REQUESTS) | false    | 50000   | Total number of requests to run (h2load -n)                                   |
+| 4 (NUMBER_OF_CLIENTS)  | false    | 60      | Number of concurrent clients (h2load -c)                                      |
+| 5 (NUMBER_OF_THREADS)  | false    | 4       | Number of concurrent threads (h2load -t)                                      |
 
-If you want to build an _über-jar_, execute the following command:
+**Currenlty configured pdf handlers :**
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
+- *pdf-fop* - vanilla [pdf fop handler](https://github.com/fugerit-org/fj-doc/tree/main/fj-doc-mod-fop)
+- *pdf-fop-pool* - [pdf fop handler with pooling](https://github.com/fugerit-org/fj-doc/tree/main/fj-doc-mod-fop) (min:20, max:40)
+- *pdf-a-fop* - [pdf-a fop handler](https://github.com/fugerit-org/fj-doc/tree/main/fj-doc-mod-fop)
+- *pdf-a-fop* - [pdf-ua fop handler](https://github.com/fugerit-org/fj-doc/tree/main/fj-doc-mod-fop)
+- *openpdf* - [openpdf handler](https://github.com/fugerit-org/fj-doc/tree/main/fj-doc-mod-openpdf-ext)
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+It is possible to change doc handlers configuration from the [freemarker-doc-process.xml](src/main/resources/fj-doc-demo-config/freemarker-doc-process.xml) XML configuration.
 
-## Creating a native executable
+## Benchmark suit
 
-You can create a native executable using:
+This script run benchmark on all doc handlers and write the output to *target/* folder.
 
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/fj-doc-quarkus-demo-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- YAML Configuration ([guide](https://quarkus.io/guides/config-yaml)): Use YAML to configure your Quarkus application
-- ArC ([guide](https://quarkus.io/guides/cdi-reference)): Build time CDI dependency injection
-
-## Provided Code
-
-### YAML Config
-
-Configure your application with YAML
-
-[Related guide section...](https://quarkus.io/guides/config-reference#configuration-examples)
-
-The Quarkus application configuration is located in `src/main/resources/application.yml`.
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)

@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- virtual threads
-- simple test 02 and 03 template
+- quarkus virtual threads
+- 3 simple test template
 - Benchmark with h2 load and graph plotting
-- Simple benchmark for pdf renderers
+- [Fugerit Venus Doc](https://github.com/fugerit-org/fj-doc) 8.5.0 

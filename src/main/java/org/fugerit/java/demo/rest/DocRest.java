@@ -25,7 +25,7 @@ public class DocRest {
     Response generateDocWorker( String chainId, String handleId ) {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream() ) {
             this.facade.handle( chainId, handleId, baos );
-            log.info( "generateDocWorker, chainId:{}, free memory:{} / max memoery:{}", chainId, Runtime.getRuntime().freeMemory()/1024/1024, Runtime.getRuntime().maxMemory()/1024/1024 );
+            log.info( "generateDocWorker, chainId:{}, free memory:{} / max memory:{}", chainId, Runtime.getRuntime().freeMemory()/1024/1024, Runtime.getRuntime().maxMemory()/1024/1024 );
             return Response.ok( baos.toByteArray() ).build();
         } catch (IOException e) {
             log.error( String.format( "Error : %s", e.getCause() ), e );

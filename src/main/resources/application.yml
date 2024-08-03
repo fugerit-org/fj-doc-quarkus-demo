@@ -1,6 +1,3 @@
-greeting:
-  message: "hello"
-
 quarkus:
   virtual-threads:
     name-prefix: doc-virtual-thread-
