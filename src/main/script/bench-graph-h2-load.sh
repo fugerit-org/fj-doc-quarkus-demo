@@ -34,9 +34,9 @@ fi
 # list of test urls
 export URL_PARAM="http://localhost:8080/doc/pdf/handler/${HANDLER}/simple-test-01.pdf http://localhost:8080/doc/pdf/handler/${HANDLER}/simple-test-02.pdf http://localhost:8080/doc/pdf/handler/${HANDLER}/simple-test-03.pdf"
 export OUTPUT_BASE=${HANDLER}
-export NUMBER_OF_REQUESTS=${3:-50000}
-export NUMBER_OF_CLIENTS=${4:-60}
-export NUMBER_OF_THREADS=${5:-4}
+export NUMBER_OF_REQUESTS=${2:-50000}
+export NUMBER_OF_CLIENTS=${3:-60}
+export NUMBER_OF_THREADS=${4:-4}
 export BASE_DIR=target
 export WARMUP_REQUESTS=1000
 
