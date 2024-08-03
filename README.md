@@ -28,8 +28,8 @@ mvn clean package
 
 Benchmark script needs : 
 - *bash* (required)
-- *h2load* (required)
-- *psrecord* (optional, if not present plot will be skipped)
+- *[h2load](https://github.com/nghttp2/nghttp2)* (required)
+- *[psrecord](https://pypi.org/project/psrecord/)* (optional, if not present plot will be skipped)
 
 ```shell
 ./src/main/script/bench-graph-h2-load.sh pdf-fop 1000
@@ -44,7 +44,7 @@ Benchmark script needs :
 | 3 (NUMBER_OF_CLIENTS)  | false    | 60      | Number of concurrent clients (h2load -c)                                      |
 | 4 (NUMBER_OF_THREADS)  | false    | 4       | Number of concurrent threads (h2load -t)                                      |
 
-**Currenlty configured pdf handlers :**
+**Currently configured pdf handlers :**
 
 - *pdf-fop* - vanilla [pdf fop handler](https://github.com/fugerit-org/fj-doc/tree/main/fj-doc-mod-fop)
 - *pdf-fop-pool* - [pdf fop handler with pooling](https://github.com/fugerit-org/fj-doc/tree/main/fj-doc-mod-fop) (min:20, max:40)
@@ -73,12 +73,44 @@ out_pdf-fop.log
 out_pdf-fop.png
 ```
 
+Below is the example content of the *target/out_pdf-fop.log* file : 
+
+```
+starting benchmark...
+spawning thread #0: 15 total client(s). 250 total requests
+spawning thread #1: 15 total client(s). 250 total requests
+spawning thread #2: 15 total client(s). 250 total requests
+spawning thread #3: 15 total client(s). 250 total requests
+Application protocol: h2c
+progress: 10% done
+progress: 20% done
+progress: 30% done
+progress: 40% done
+progress: 50% done
+progress: 60% done
+progress: 70% done
+progress: 80% done
+progress: 90% done
+progress: 100% done
+
+finished in 779.33ms, 1283.15 req/s, 21.16MB/s
+requests: 1000 total, 1000 started, 1000 done, 1000 succeeded, 0 failed, 0 errored, 0 timeout
+status codes: 1000 2xx, 0 3xx, 0 4xx, 0 5xx
+traffic: 16.49MB (17295040) total, 4.92KB (5040) headers (space savings 91.00%), 16.46MB (17259800) data
+                     min         max         mean         sd        +/- sd
+time for request:     4.94ms    178.98ms     43.29ms     28.90ms    67.80%
+time for connect:       61us       995us       450us       257us    61.67%
+time to 1st byte:    13.75ms    104.97ms     36.04ms     19.11ms    85.00%
+req/s           :      20.61       32.65       23.25        2.37    81.67%
+```
+
 NOTE: if *psrecord* is not present, no *png* will be created.
 
 And here is some samples 
 
-| platform                | pdf-fop                          | pdf-fop-pool                     | openpdf                          | output folder                                                              | parameters                                   |
-|-------------------------|----------------------------------|----------------------------------|----------------------------------|----------------------------------------------------------------------------|----------------------------------------------|
-| macbook pro 16 max 32gb | 28.05s, 1782.40 req/s, 29.88MB/s | 20.81s, 2402.76 req/s, 40.28MB/s | 53.42s, 936.05 req/s, 8.89MB/s   | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/macpro_max_16_m1) | h2load, 50000 request, 60 clients, 4 threads |
-| ryzen 3700X 32gb        | 28.07s, 1781.52 req/s, 29.86MB/s | 19.66s, 2543.10 req/s, 42.63MB/s | 40.91s, 1222.29 req/s, 11.61MB/s | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/ryzen_3700X)      | h2load, 50000 request, 60 clients, 4 threads |
+| platform                                | pdf-fop                          | pdf-fop-pool                     | openpdf                          | output folder                                                | parameters                                   |
+| --------------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- | ------------------------------------------------------------ | -------------------------------------------- |
+| macbook pro 16 max 32gb                 | 28.05s, 1782.40 req/s, 29.88MB/s | 20.81s, 2402.76 req/s, 40.28MB/s | 53.42s, 936.05 req/s, 8.89MB/s   | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/macpro_max_16_m1) | h2load, 50000 request, 60 clients, 4 threads |
+| ryzen 3700X 32gb                        | 28.07s, 1781.52 req/s, 29.86MB/s | 19.66s, 2543.10 req/s, 42.63MB/s | 40.91s, 1222.29 req/s, 11.61MB/s | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/ryzen_3700X) | h2load, 50000 request, 60 clients, 4 threads |
+| AMD Ryzen 9 3900X (24) @ 3.800GHz 128gb | 20.16s, 2479.60 req/s, 41.59MB/s | 16.94s, 2951.92 req/s, 49.51MB/s | 25.30s, 1976.29 req/s, 18.93MB/s | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/ryzen_9_3900X) | h2load, 50000 request, 60 clients, 4 threads |
 

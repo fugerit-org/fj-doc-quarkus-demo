@@ -24,6 +24,16 @@ function print() {
 
 print "Starting the app 🏎️"
 
+# check if h2load is installed
+if [ ! -x "$(command -v h2load)" ]; then
+  echo "Missing h2load, please install nghttp2"
+  echo "On MacOS : brew install nghttp2"
+  echo "On Ubuntu/Debian based : apt-get install nghttp2-client"
+  echo "On Fedora/RPM based : dnf install nghttp2"
+  echo "For more info : https://nghttp2.org/documentation/package_README.html"
+  exit 1
+fi
+
 # the handler
 export HANDLER=${1}
 if [[ "${HANDLER}" = "" ]]; then
@@ -39,6 +49,21 @@ export NUMBER_OF_CLIENTS=${3:-60}
 export NUMBER_OF_THREADS=${4:-4}
 export BASE_DIR=target
 export WARMUP_REQUESTS=1000
+
+# check if quarkus-run.jar exists
+if [ ! -f ./${BASE_DIR}/quarkus-app/quarkus-run.jar ]; then
+  echo "Missing quarkus-run.jar, please run 'mvn clean package' first"
+  exit 2
+fi
+
+# check if quarkus app is running
+if [ -n "$(lsof -ti :8080)" ]; then
+  echo "It seems that Quarkus app is already running, please stop it first"
+  echo "TCP ports in use :"
+  echo "$(lsof -ti :8080 | xargs -r ps -o pid,cmd -p)"
+  echo "To stop the app : kill -9 $(lsof -ti :8080)"
+  exit 3
+fi
 
 echo "Running with arguments : HANDLER=${HANDLER}, NUMBER_OF_REQUESTS=${NUMBER_OF_REQUESTS}, NUMBER_OF_CLIENTS=${NUMBER_OF_CLIENTS}, URL_PARAM=${URL_PARAM}"
 
@@ -62,5 +87,16 @@ h2load -n${NUMBER_OF_REQUESTS} -c${NUMBER_OF_CLIENTS} -t${NUMBER_OF_THREADS} --w
 
 
 print "JVM run done!🎉"
+print "Killing process ${PID}"
+
+# try to kill the process
 kill $PID
+
+#check if quarkus app is still running
+if [ -n "$(lsof -ti :8080)" ]; then
+  echo "Quarkus app is still running, killing it"
+  kill -9 $(lsof -ti :8080)
+fi
+
+print "The benchmark results are in ${BASE_DIR}/target folder"
 sleep 1
