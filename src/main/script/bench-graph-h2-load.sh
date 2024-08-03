@@ -98,4 +98,5 @@ if [ -n "$(lsof -ti :8080)" ]; then
   kill -9 $(lsof -ti :8080)
 fi
 
+print "The benchmark results are in ${BASE_DIR}/target folder"
 sleep 1
