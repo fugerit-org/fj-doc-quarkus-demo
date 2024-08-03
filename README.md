@@ -28,8 +28,8 @@ mvn clean package
 
 Benchmark script needs : 
 - *bash* (required)
-- *h2load* (required)
-- *psrecord* (optional, if not present plot will be skipped)
+- *[h2load](https://github.com/nghttp2/nghttp2)* (required)
+- *[psrecord](https://pypi.org/project/psrecord/)* (optional, if not present plot will be skipped)
 
 ```shell
 ./src/main/script/bench-graph-h2-load.sh pdf-fop 1000
