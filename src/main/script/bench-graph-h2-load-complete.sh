@@ -11,5 +11,5 @@ HANDLERS=(pdf-fop pdf-fop-pool openpdf)
 echo "2. Running benchmark"
 for docHandler in ${HANDLERS[@]}; do
   echo "Current doc handler : ${docHandler}"
-  ./src/main/script/bench-graph-h2-load.sh ${docHandler} ${BASE_DIR}/benchmark_result_${docHandler}.txt >> ${BASE_DIR}/benchmark_log.txt 2>&1
+  ./src/main/script/bench-graph-h2-load.sh ${docHandler} >> ${BASE_DIR}/benchmark_log.txt 2>&1
 done
