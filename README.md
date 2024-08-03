@@ -73,6 +73,37 @@ out_pdf-fop.log
 out_pdf-fop.png
 ```
 
+Below is the example content of the *target/out_pdf-fop.log* file : 
+
+```
+starting benchmark...
+spawning thread #0: 15 total client(s). 250 total requests
+spawning thread #1: 15 total client(s). 250 total requests
+spawning thread #2: 15 total client(s). 250 total requests
+spawning thread #3: 15 total client(s). 250 total requests
+Application protocol: h2c
+progress: 10% done
+progress: 20% done
+progress: 30% done
+progress: 40% done
+progress: 50% done
+progress: 60% done
+progress: 70% done
+progress: 80% done
+progress: 90% done
+progress: 100% done
+
+finished in 779.33ms, 1283.15 req/s, 21.16MB/s
+requests: 1000 total, 1000 started, 1000 done, 1000 succeeded, 0 failed, 0 errored, 0 timeout
+status codes: 1000 2xx, 0 3xx, 0 4xx, 0 5xx
+traffic: 16.49MB (17295040) total, 4.92KB (5040) headers (space savings 91.00%), 16.46MB (17259800) data
+                     min         max         mean         sd        +/- sd
+time for request:     4.94ms    178.98ms     43.29ms     28.90ms    67.80%
+time for connect:       61us       995us       450us       257us    61.67%
+time to 1st byte:    13.75ms    104.97ms     36.04ms     19.11ms    85.00%
+req/s           :      20.61       32.65       23.25        2.37    81.67%
+```
+
 NOTE: if *psrecord* is not present, no *png* will be created.
 
 And here is some samples 
