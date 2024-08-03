@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2024-08-03
+
 ### Added
 
 - benchmark samples with Ryzen 3700X and Mac Book Pro 16 Max M1
