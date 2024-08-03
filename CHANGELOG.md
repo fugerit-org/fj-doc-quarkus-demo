@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- benchmark samples with Ryzen 3700X and Mac Book Pro 16 Max M1
 - quarkus virtual threads
 - 3 simple test template
 - Benchmark with h2 load and graph plotting

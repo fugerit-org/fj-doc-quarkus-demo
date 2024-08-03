@@ -70,7 +70,8 @@ out_pdf-fop.png
 
 And here is some samples 
 
-| platform                | pdf-fop                          | pdf-fop-pool                     | openpdf                        | output folder                                                              |
-|-------------------------|----------------------------------|----------------------------------|--------------------------------|----------------------------------------------------------------------------|
-| macbook pro 16 max 32gb | 28.05s, 1782.40 req/s, 29.88MB/s | 20.81s, 2402.76 req/s, 40.28MB/s | 53.42s, 936.05 req/s, 8.89MB/s | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/macpro_max_16_m1) |
+| platform                | pdf-fop                          | pdf-fop-pool                     | openpdf                          | output folder                                                              |
+|-------------------------|----------------------------------|----------------------------------|----------------------------------|----------------------------------------------------------------------------|
+| macbook pro 16 max 32gb | 28.05s, 1782.40 req/s, 29.88MB/s | 20.81s, 2402.76 req/s, 40.28MB/s | 53.42s, 936.05 req/s, 8.89MB/s   | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/macpro_max_16_m1) |
+| ryzen 3700X 32gb        | 28.07s, 1781.52 req/s, 29.86MB/s | 19.66s, 2543.10 req/s, 42.63MB/s | 40.91s, 1222.29 req/s, 11.61MB/s | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/ryzen_3700X)      |
 
