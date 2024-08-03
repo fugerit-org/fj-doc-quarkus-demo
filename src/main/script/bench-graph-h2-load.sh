@@ -42,9 +42,14 @@ export WARMUP_REQUESTS=1000
 
 echo "Running with arguments : HANDLER=${HANDLER}, NUMBER_OF_REQUESTS=${NUMBER_OF_REQUESTS}, NUMBER_OF_CLIENTS=${NUMBER_OF_CLIENTS}, URL_PARAM=${URL_PARAM}"
 
-java -XX:-UseJVMCICompiler -Xmx1024m -jar ./${BASE_DIR}/quarkus-app/quarkus-run.jar &
+java -Xmx1024m -jar ./${BASE_DIR}/quarkus-app/quarkus-run.jar &
 export PID=$!
-psrecord $PID --plot "${BASE_DIR}/out_${OUTPUT_BASE}.png" --include-children &
+if [ -x "$(command -v psrecord)" ]; then
+  echo "psrecord installed, plotting process : ${PID}"
+  psrecord $PID --plot "${BASE_DIR}/out_${OUTPUT_BASE}.png" --include-children &
+else
+  echo "psrecord not installed, plotting skipped for process : ${PID}"
+fi
 
 sleep 8
 print "Done waiting for startup..."

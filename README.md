@@ -26,7 +26,10 @@ mvn clean package
 
 ### 2. Run benchmark script
 
-Benchmark script requirements : *bash*, *h2load*, *psrecord*
+Benchmark script needs : 
+- *bash* (required)
+- *h2load* (required)
+- *psrecord* (optional, if not present plot will be skipped)
 
 ```shell
 ./src/main/script/bench-graph-h2-load.sh pdf-fop 1000
@@ -69,6 +72,8 @@ out_pdf-fop-pool.png
 out_pdf-fop.log
 out_pdf-fop.png
 ```
+
+NOTE: if *psrecord* is not present, no *png* will be created.
 
 And here is some samples 
 
