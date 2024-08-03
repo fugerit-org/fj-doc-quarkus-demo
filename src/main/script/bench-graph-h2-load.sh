@@ -56,6 +56,15 @@ if [ ! -f ./${BASE_DIR}/quarkus-app/quarkus-run.jar ]; then
   exit 2
 fi
 
+# check if quarkus app is running
+if [ -n "$(lsof -ti :8080)" ]; then
+  echo "It seems that Quarkus app is already running, please stop it first"
+  echo "TCP ports in use :"
+  echo "$(lsof -ti :8080 | xargs -r ps -o pid,cmd -p)"
+  echo "To stop the app : kill -9 $(lsof -ti :8080)"
+  exit 3
+fi
+
 echo "Running with arguments : HANDLER=${HANDLER}, NUMBER_OF_REQUESTS=${NUMBER_OF_REQUESTS}, NUMBER_OF_CLIENTS=${NUMBER_OF_CLIENTS}, URL_PARAM=${URL_PARAM}"
 
 java -Xmx1024m -jar ./${BASE_DIR}/quarkus-app/quarkus-run.jar &
