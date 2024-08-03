@@ -87,5 +87,15 @@ h2load -n${NUMBER_OF_REQUESTS} -c${NUMBER_OF_CLIENTS} -t${NUMBER_OF_THREADS} --w
 
 
 print "JVM run done!🎉"
+print "Killing process ${PID}"
+
+# try to kill the process
 kill $PID
+
+#check if quarkus app is still running
+if [ -n "$(lsof -ti :8080)" ]; then
+  echo "Quarkus app is still running, killing it"
+  kill -9 $(lsof -ti :8080)
+fi
+
 sleep 1
