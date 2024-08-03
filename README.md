@@ -44,7 +44,7 @@ Benchmark script needs :
 | 3 (NUMBER_OF_CLIENTS)  | false    | 60      | Number of concurrent clients (h2load -c)                                      |
 | 4 (NUMBER_OF_THREADS)  | false    | 4       | Number of concurrent threads (h2load -t)                                      |
 
-**Currenlty configured pdf handlers :**
+**Currently configured pdf handlers :**
 
 - *pdf-fop* - vanilla [pdf fop handler](https://github.com/fugerit-org/fj-doc/tree/main/fj-doc-mod-fop)
 - *pdf-fop-pool* - [pdf fop handler with pooling](https://github.com/fugerit-org/fj-doc/tree/main/fj-doc-mod-fop) (min:20, max:40)
