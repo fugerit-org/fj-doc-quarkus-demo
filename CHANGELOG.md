@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- benchmark samples with Ryzen 3900X (thanks to [amusarra](https://github.com/amusarra))
+
 ### Changed
 
 - upgrade quarkus version to 3.12.3
+- benchmark script review (thanks to [amusarra](https://github.com/amusarra))
 
 ## [1.0.0] - 2024-08-03
 
