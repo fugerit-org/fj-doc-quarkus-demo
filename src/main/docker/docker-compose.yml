@@ -1,0 +1,19 @@
+version: '3.8'
+# Define the services
+services:
+  fj-doc-quarkus-demo:
+    image: fugeritorg/fj-doc-quarkus-demo:v1.1.0
+    container_name: fj-doc-quarkus-demo
+    restart: always
+    environment:
+      - JAVA_OPTS_APPEND= -Xmx1024m
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 1200M
+        reservations:
+          cpus: '1.0'
+          memory: 512M

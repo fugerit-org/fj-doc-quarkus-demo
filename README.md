@@ -7,6 +7,7 @@ Simple demo application to test performances of [Fugerit Venus Doc](https://gith
 [![code of conduct](https://img.shields.io/badge/conduct-Contributor%20Covenant-purple.svg)](https://github.com/fugerit-org/fj-doc-quarkus-demo/blob/main/CODE_OF_CONDUCT.md)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_fj-doc-quarkus-demo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-doc-quarkus-demo)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_fj-doc-quarkus-demo&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-doc-quarkus-demo)
+[![Docker images](https://img.shields.io/badge/dockerhub-images-important.svg?logo=Docker)](https://hub.docker.com/repository/docker/fugeritorg/fj-doc-quarkus-demo/general)
 
 [![Java version](https://img.shields.io/badge/JD-java%2021+-%23113366.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://universe.fugerit.org/src/docs/versions/java21.html)
 [![Apache Maven](https://img.shields.io/badge/Apache%20Maven-3.9.0+-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)](https://universe.fugerit.org/src/docs/versions/maven3_9.html)
@@ -122,3 +123,18 @@ And here is some samples
 | 8.5.0  | AMD Ryzen 3700X 32gb (Ubuntu 22)                    | Oracle GraalVM 21 | 28.07s, 1781.52 req/s, 29.86MB/s | 19.66s, 2543.10 req/s, 42.63MB/s | 40.91s, 1222.29 req/s, 11.61MB/s | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/ryzen_3700X) | h2load, 50000 request, 60 clients, 4 threads |
 | 8.5.0  | AMD Ryzen 9 3900X (24) @ 3.800GHz 128gb (Fedora 40) | OpenJDK Red Hat 21 | 20.16s, 2479.60 req/s, 41.59MB/s | 16.94s, 2951.92 req/s, 49.51MB/s | 25.30s, 1976.29 req/s, 18.93MB/s | [2024-08-03](src/test/resources/benchmark_out/2024-08-03/ryzen_9_3900X) | h2load, 50000 request, 60 clients, 4 threads |
 
+##  Benchmark with docker
+
+### Starting cointainer (default is 1200m and 4 cpu maximu)
+
+```shell
+docker compose -f src/main/docker/docker-compose.yml up -d
+```
+
+### Run benchmark
+
+```shell
+export NO_START=1;./src/main/script/bench-graph-h2-load-complete.sh
+```
+
+You will need the NO_START=1 environment variable, so quarkus app will not be started by the script

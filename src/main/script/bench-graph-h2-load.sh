@@ -10,6 +10,9 @@
 # $3 (optional, default 60) - number of clients
 # $4 (optional, default 4) - number of threads
 #
+# environments :
+# NO_START - if set to '1' quarkus will not be started and no plotting will be performed
+#
 # to run this script :
 # - clone project : https://github.com/fugerit-org/fj-doc-quarkus-demo
 # - from the project root : 'mvn clean package' (requires jdk 21)
@@ -57,7 +60,9 @@ if [ ! -f ./${BASE_DIR}/quarkus-app/quarkus-run.jar ]; then
 fi
 
 # check if quarkus app is running
-if [ -n "$(lsof -ti :8080)" ]; then
+if [ "${NO_START}" = "1" ]; then
+  echo "NO_START flag = 1, assuming quarkus is already started"
+elif [ -n "$(lsof -ti :8080)" ]; then
   echo "It seems that Quarkus app is already running, please stop it first"
   echo "TCP ports in use :"
   echo "$(lsof -ti :8080 | xargs -r ps -o pid,cmd -p)"
@@ -67,13 +72,15 @@ fi
 
 echo "Running with arguments : HANDLER=${HANDLER}, NUMBER_OF_REQUESTS=${NUMBER_OF_REQUESTS}, NUMBER_OF_CLIENTS=${NUMBER_OF_CLIENTS}, URL_PARAM=${URL_PARAM}"
 
-java -Xmx1024m -jar ./${BASE_DIR}/quarkus-app/quarkus-run.jar &
-export PID=$!
-if [ -x "$(command -v psrecord)" ]; then
-  echo "psrecord installed, plotting process : ${PID}"
-  psrecord $PID --plot "${BASE_DIR}/out_${OUTPUT_BASE}.png" --include-children &
-else
-  echo "psrecord not installed, plotting skipped for process : ${PID}"
+if [ "${NO_START}" != "1" ]; then
+  java -Xmx1024m -jar ./${BASE_DIR}/quarkus-app/quarkus-run.jar &
+  export PID=$!
+  if [ -x "$(command -v psrecord)" ]; then
+    echo "psrecord installed, plotting process : ${PID}"
+    psrecord $PID --plot "${BASE_DIR}/out_${OUTPUT_BASE}.png" --include-children &
+  else
+    echo "psrecord not installed, plotting skipped for process : ${PID}"
+  fi
 fi
 
 sleep 8
@@ -87,15 +94,16 @@ h2load -n${NUMBER_OF_REQUESTS} -c${NUMBER_OF_CLIENTS} -t${NUMBER_OF_THREADS} --w
 
 
 print "JVM run done!🎉"
-print "Killing process ${PID}"
 
-# try to kill the process
-kill $PID
-
-#check if quarkus app is still running
-if [ -n "$(lsof -ti :8080)" ]; then
-  echo "Quarkus app is still running, killing it"
-  kill -9 $(lsof -ti :8080)
+if [ "${NO_START}" != "1" ]; then
+  print "Killing process ${PID}"
+  # try to kill the process
+  kill $PID
+  #check if quarkus app is still running
+  if [ -n "$(lsof -ti :8080)" ]; then
+    echo "Quarkus app is still running, killing it"
+    kill -9 $(lsof -ti :8080)
+  fi
 fi
 
 print "The benchmark results are in ${BASE_DIR}/target folder"
