@@ -54,7 +54,15 @@ Benchmark script needs :
 
 It is possible to change doc handlers configuration from the [freemarker-doc-process.xml](src/main/resources/fj-doc-demo-config/freemarker-doc-process.xml) XML configuration.
 
-## Benchmark suit
+### 3. Run and test
+
+```shell
+mvn quarkus:dev
+```
+
+open <http://localhost:8080/doc/pdf/handler/pdf-fop/simple-test-01.pdf>
+
+##  Benchmark suit
 
 This script run benchmark on all doc handlers and write the output to *target/* folder.
 
