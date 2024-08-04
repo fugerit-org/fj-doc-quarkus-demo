@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - upgrade quarkus version to 3.12.3
 - benchmark script review (thanks to [amusarra](https://github.com/amusarra))
+- Added platform data and java version in benchmark samples
 
 ## [1.0.0] - 2024-08-03
 
