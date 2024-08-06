@@ -65,7 +65,7 @@ if [ "${NO_START}" = "1" ]; then
 elif [ -n "$(lsof -tiTCP:8080 -sTCP:LISTEN | xargs -r ps -p | grep java | awk '{print $1}')" ]; then
   echo "It seems that Quarkus app is already running, please stop it first"
   echo "TCP ports in use :"
-  echo "$(lsof -tiTCP:8080 -sTCP:LISTEN | xargs -r ps -p | grep java)"
+  lsof -tiTCP:8080 -sTCP:LISTEN | xargs -r ps -p | grep java
   echo "To stop the app : kill -9 $(lsof -tiTCP:8080 -sTCP:LISTEN | xargs -r ps -p | grep java | awk '{print $1}')"
   exit 3
 fi
