@@ -62,11 +62,11 @@ fi
 # check if quarkus app is running
 if [ "${NO_START}" = "1" ]; then
   echo "NO_START flag = 1, assuming quarkus is already started"
-elif [ -n "$(lsof -ti :8080)" ]; then
+elif [ -n "$(lsof -tiTCP:8080 -sTCP:LISTEN | xargs -r ps -p | grep java | awk '{print $1}')" ]; then
   echo "It seems that Quarkus app is already running, please stop it first"
   echo "TCP ports in use :"
-  echo "$(lsof -ti :8080 | xargs -r ps -o pid,cmd -p)"
-  echo "To stop the app : kill -9 $(lsof -ti :8080)"
+  lsof -tiTCP:8080 -sTCP:LISTEN | xargs -r ps -p | grep java
+  echo "To stop the app : kill -9 $(lsof -tiTCP:8080 -sTCP:LISTEN | xargs -r ps -p | grep java | awk '{print $1}')"
   exit 3
 fi
 
@@ -99,12 +99,17 @@ if [ "${NO_START}" != "1" ]; then
   print "Killing process ${PID}"
   # try to kill the process
   kill $PID
-  #check if quarkus app is still running
-  if [ -n "$(lsof -ti :8080)" ]; then
+
+  # Check if quarkus app is still running
+  # wait 5 seconds
+  sleep 5
+
+  PID_TO_KILL="$(lsof -tiTCP:8080 -sTCP:LISTEN | xargs -r ps -p | grep java | awk '{print $1}')"
+  if [[ -n  ${PID_TO_KILL} ]]; then
     echo "Quarkus app is still running, killing it"
-    kill -9 $(lsof -ti :8080)
+    kill -9 "${PID_TO_KILL}"
   fi
 fi
 
-print "The benchmark results are in ${BASE_DIR}/target folder"
+print "The benchmark results are in ${BASE_DIR} folder"
 sleep 1
