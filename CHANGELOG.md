@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - upgrade quarkus version to 3.14.4
 - benchmark script review compatibility with macOS/Linux
 
+### Removed
+
+- maven wrapper
+
 ## [1.1.0] - 2024-08-05
 
 ### Added
