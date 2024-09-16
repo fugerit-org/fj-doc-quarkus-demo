@@ -29,5 +29,10 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           sonar-token: ${{ secrets.SONAR_TOKEN }}
+          snyk-token: ${{ secrets.SNYK_TOKEN }}
+          snyk-image: fj-doc-quarkus-demo
+          snyk-args: --file=./src/main/docker/Dockerfile.jvm
+          snyk-dockercontext: .
+          snyk-dockertag: fj-doc-quarkus-demo
           disable-maven-dependency-submission: ${{ vars.DISABLE_MAVEN_DEPENDENCY_SUBMISSION }}
           java-version: '21'
