@@ -11,7 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - benchmark samples on container
 
+### Changed
+
+- [Fugerit Venus Doc](https://github.com/fugerit-org/fj-doc) 8.8.6
+
 ### Fixed
+
 - benchmark script review compatibility with macOS/Linux
 
 ## [1.1.0] - 2024-08-05

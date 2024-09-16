@@ -21,7 +21,7 @@
         <quarkus.platform.version>3.12.3</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.2.5</surefire-plugin.version>
-        <fj-doc-version>8.5.0</fj-doc-version>
+        <fj-doc-version>8.8.6</fj-doc-version>
     </properties>
 
     <dependencyManagement>
