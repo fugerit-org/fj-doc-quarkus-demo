@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - [Fugerit Venus Doc](https://github.com/fugerit-org/fj-doc) 8.8.6
+- base image registry.access.redhat.com/ubi9/openjdk-21:1.20-2.1725851045
 
 ### Fixed
 
