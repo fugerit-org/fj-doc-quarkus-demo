@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- upgrade quarkus version to 3.14.4
 - benchmark script review compatibility with macOS/Linux
 
 ## [1.1.0] - 2024-08-05
